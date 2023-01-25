@@ -11,4 +11,6 @@ private:
     TgBot::Bot& bot;
     std::vector<std::vector<char>> board;
     char currentPlayer;
+
+    void sendInitialBoard(long long chatId);
 };
