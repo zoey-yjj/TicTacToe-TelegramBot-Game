@@ -13,4 +13,5 @@ private:
     char currentPlayer;
 
     void sendInitialBoard(long long chatId);
+    void sendUpdatedBoard(long long chatId);
 };
