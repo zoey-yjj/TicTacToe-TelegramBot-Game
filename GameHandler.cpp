@@ -29,6 +29,13 @@ void GameHandler::handleIncomingMessage(TgBot::Message::Ptr message) {
             // Make the move
             board[row][col] = currentPlayer;
 
+            // Check if the game has been won
+            if (checkWin()) {
+                bot.getApi().sendMessage(message->chat->id, "Player " + std::string(1, currentPlayer) + " wins!\n\n" 
+                                                            "Game Over");
+                return;
+            }
+
             // Switch the player turn
             currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
 
@@ -39,6 +46,28 @@ void GameHandler::handleIncomingMessage(TgBot::Message::Ptr message) {
             bot.getApi().sendMessage(message->chat->id, "Invalid move! Please try again.");
         }
     }
+}
+
+bool GameHandler::checkWin() {
+    // Check rows
+    for (int i = 0; i < 3; i++) {
+        if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][1] == board[i][2])
+            return true;
+    }
+
+    // Check columns
+    for (int i = 0; i < 3; i++) {
+        if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[1][i] == board[2][i])
+            return true;
+    }
+
+    // Check diagonals
+    if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2])
+        return true;
+    if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0])
+        return true;
+
+    return false;
 }
 
 void GameHandler::sendInitialBoard(long long chatId) {

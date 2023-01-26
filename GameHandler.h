@@ -12,6 +12,7 @@ private:
     std::vector<std::vector<char>> board;
     char currentPlayer;
 
+    bool checkWin();
     void sendInitialBoard(long long chatId);
     void sendUpdatedBoard(long long chatId);
 };
