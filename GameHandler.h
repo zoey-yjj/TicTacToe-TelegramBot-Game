@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+#include <string>
 #include <tgbot/tgbot.h>
 
 class GameHandler {

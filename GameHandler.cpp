@@ -46,6 +46,11 @@ void GameHandler::handleIncomingMessage(TgBot::Message::Ptr message) {
             bot.getApi().sendMessage(message->chat->id, "Invalid move! Please try again.");
         }
     }
+
+    // Player's input is not the correct format, send reminder to player
+     else {
+        bot.getApi().sendMessage(message->chat->id, "Please use the format 'row column'." );
+    }
 }
 
 bool GameHandler::checkWin() {
